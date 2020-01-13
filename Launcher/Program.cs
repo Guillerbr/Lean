@@ -84,6 +84,9 @@ namespace QuantConnect.Lean.Launcher
             //Setup packeting, queue and controls system: These don't do much locally.
             leanEngineSystemHandlers.Initialize();
 
+            // start algorithm worker thread
+            WorkerThread.InitializeAlgorithmThread();
+
             //-> Pull job from QuantConnect job queue, or, pull local build:
             string assemblyPath;
             var job = leanEngineSystemHandlers.JobQueue.NextJob(out assemblyPath);

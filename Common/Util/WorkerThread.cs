@@ -32,6 +32,11 @@ namespace QuantConnect.Util
         private readonly Thread _workerThread;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static WorkerThread Instance { get; private set; }
+
+        /// <summary>
         /// Will be set when the worker thread finishes a work item
         /// </summary>
         public AutoResetEvent FinishedWorkItem { get; }
@@ -101,6 +106,17 @@ namespace QuantConnect.Util
             catch (Exception exception)
             {
                 Log.Error(exception);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void InitializeAlgorithmThread()
+        {
+            if (Instance == null)
+            {
+                Instance = new WorkerThread();
             }
         }
     }

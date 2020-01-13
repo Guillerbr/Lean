@@ -96,7 +96,7 @@ namespace QuantConnect.Lean.Engine
                 Thread threadResults = null;
                 Thread threadRealTime = null;
                 Thread threadAlphas = null;
-                WorkerThread workerThread = null;
+                var workerThread = WorkerThread.Instance;
 
                 //-> Initialize messaging system
                 SystemHandlers.Notify.SetAuthentication(job);
@@ -116,8 +116,6 @@ namespace QuantConnect.Lean.Engine
                     // since the algorithm constructor will use it
                     var marketHoursDatabase = marketHoursDatabaseTask.Result;
 
-                    // start worker thread
-                    workerThread = new WorkerThread();
                     AlgorithmHandlers.Setup.WorkerThread = workerThread;
 
                     // Save algorithm to cache, load algorithm instance:
